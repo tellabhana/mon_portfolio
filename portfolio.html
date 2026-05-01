@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #F6FAFF;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 32px;
+      background-color: #2c3e50;
+      color: white;
+    }
+
+    .menu .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 16px;
+      
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      
+    }
+
+    
+
+    
+
+    .project {
+      background: white;
+      border-radius: 10px;
+      
+      padding: 32px;
+      margin-bottom: 32px;
+      display: flex;
+      
+      gap: 32px;
+      align-items: center;
+    }
+
+    .project img {
+      width: 300px;
+      border-radius: 8px;
+      
+    }
+
+    
+    .project-details {
+      flex: 1;
+    }
+
+    .project-details h2 {
+      
+      color: #2c3e50;
+    }
+
+    
+    .project-details a {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 8px 16px;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    
+  </style>
+</head>
+<body>
+  <header class="menu">
+    <div class="logo">Hana TELLAB</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="apropos.html">À propos</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        
+        <li><a href="formation.html">Formation</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  
+    
+
+    <section class="project">
+      <img src="images/mini-jeu.png" >
+      <div class="project-details">
+        <h2>Mini-Jeu Médical</h2>
+        <p>Un jeu éducatif interactif pour les étudiants en médecine. Il permet de s'entraîner avec des quiz "Vrai ou Faux" .</p>
+        <a href="mini-jeu.html">Voir le projet</a>
+      </div>
+    </section>
+
+    
+  </main>
+</body>
+</html>

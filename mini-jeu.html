@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Mini Jeu Médical</title>
+<style>
+  body {
+  font-family: Arial, sans-serif;
+  background-color: #F6FAFF;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+
+header.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background-color: #2c3e50;
+  color: white;
+}
+
+.menu .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 16px;
+  
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  
+}
+
+
+
+h1 {
+  text-align: center;
+  margin: 30px 0;
+}
+
+
+section {
+  max-width: 500px;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  
+}
+
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+
+#question {
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+#resultat {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+
+.hidden {
+  display: none;
+}
+</style>
+</head>
+
+
+<body>
+  <header class="menu">
+    <div class="logo">Hana TELLAB</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="apropos.html">À propos</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        
+        <li><a href="formation.html">Formation</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+<h1>Mini Jeu Médical</h1>
+
+
+
+<section id="inscription">
+  <h2>Inscription</h2>
+
+  <input type="text" id="username_insc" placeholder="Nom d'utilisateur"><br>
+  <input type="password" id="password_insc" placeholder="Mot de passe"><br>
+
+  <button onclick="inscription()">S'inscrire</button>
+  <p><a href="#" onclick="showLogin()">Se connecter</a></p>
+</section>
+
+---
+
+
+<section id="connexion" style="display:none;">
+  <h2>Connexion</h2>
+
+  <input type="text" id="username_login" placeholder="Nom d'utilisateur"><br>
+  <input type="password" id="password_login" placeholder="Mot de passe"><br>
+
+  <button onclick="connexion()">Se connecter</button>
+  <p><a href="#" onclick="showRegister()">Créer un compte</a></p>
+</section>
+
+---
+
+
+<section id="jeu" style="display:none;">
+  <h2>Quiz Médical</h2>
+
+  <div id="question">Clique pour commencer</div>
+
+  <button onclick="repondre(true)">Vrai</button>
+  <button onclick="repondre(false)">Faux</button>
+
+  <p id="resultat"></p>
+</section>
+
+
+
+<script>
+
+
+function showLogin() {
+  document.getElementById("inscription").style.display = "none";
+  document.getElementById("connexion").style.display = "block";
+}
+
+function showRegister() {
+  document.getElementById("connexion").style.display = "none";
+  document.getElementById("inscription").style.display = "block";
+}
+
+
+function inscription() {
+  let username = document.getElementById("username_insc").value;
+  let password = document.getElementById("password_insc").value;
+
+  if (!username || !password) {
+    alert("Remplis tous les champs");
+    return;
+  }
+
+  localStorage.setItem("username", username);
+  localStorage.setItem("password", password);
+
+  alert("Compte créé ✔");
+  showLogin();
+}
+
+
+function connexion() {
+  let username = document.getElementById("username_login").value;
+  let password = document.getElementById("password_login").value;
+
+  let savedUsername = localStorage.getItem("username");
+  let savedPassword = localStorage.getItem("password");
+
+  if (username === savedUsername && password === savedPassword) {
+    alert("Connexion réussie ✔ Bienvenue !");
+
+    document.getElementById("connexion").style.display = "none";
+    document.getElementById("jeu").style.display = "block";
+
+    afficherQuestion();
+  } else {
+    alert("Nom ou mot de passe incorrect ❌");
+  }
+}
+
+
+let questions = [
+  { q: "Le syndrome néphrotique est toujours associé à une hématurie.", r: false },
+  { q: "La stimulation du nerf vague peut entraîner une bradycardie.", r: true},
+  { q: "La maladie de Parkinson est due à une dégénérescence des neurones dopaminergiques du cortex préfrontal.", r: true },
+  { q: "L’aspirine est contre-indiquée chez l’enfant atteint de syndrome viral aigu en raison du risque de syndrome de Reye.", r: true },
+  { q: "Un patient avec un pH artériel de 7,52 est en acidose métabolique.", r: false },
+  { q: ".", r: true },
+  { q: "Un souffle systolique en éjection irradiant vers les carotides évoque une sténose aortique.", r: true },
+  { q: "La metformine peut provoquer une acidose lactique, surtout en cas d’insuffisance rénals.", r: true },
+  { q: "Les bêta-bloquants sont formellement contre-indiqués dans l’insuffisance cardiaque.", r: false },
+  { q: "Le diabète insipide résulte d’une sécrétion excessive d’ADH.", r: false },
+  { q: "Une douleur thoracique brutale transfixiante évoque une dissection aortique.", r: true },
+  { q: "La polyglobulie secondaire peut être due à une hypoxie chronique comme dans la BPCO.", r: true },
+  { q: "Dans un bloc auriculo-ventriculaire de type Mobitz II, le risque d’évolution vers un bloc complet est faible.", r: false},
+  { q: "Les IgA sont les principales immunoglobulines présentes dans la circulation sanguine.", r: false },
+  
+  
+  
+  
+  
+];
+
+let index = 0;
+
+function afficherQuestion() {
+  document.getElementById("question").innerText = questions[index].q;
+  document.getElementById("resultat").innerText = "";
+}
+
+function repondre(rep) {
+  if (rep === questions[index].r) {
+    document.getElementById("resultat").innerText = "✔ Bonne réponse";
+  } else {
+    document.getElementById("resultat").innerText = "❌ Faux";
+  }
+
+  index++;
+
+  if (index < questions.length) {
+    setTimeout(afficherQuestion, 1000);
+  } else {
+    document.getElementById("question").innerText = "Quiz terminé";
+    document.getElementById("resultat").innerText = "";
+  }
+}
+
+</script>
+
+</body>
+</html>
